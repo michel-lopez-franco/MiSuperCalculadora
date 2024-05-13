@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 2  # Número de réplicas que quieres correr
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest  # Utiliza la última imagen de Nginx disponible
+        ports:
+        - containerPort: 80  # El puerto en el que Nginx escucha dentro del contenedor
+        resources:  # Add this section to specify resource limits
+          limits:
+            cpu: "1"  # Example: limit CPU usage to 1 CPU
+            memory: "512Mi"  # Example: limit memory usage to 512 MiB
+
+            

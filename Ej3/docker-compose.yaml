@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  gateway:
+    build: ./gateway
+    ports:
+      - "8000:8000"
+    networks:
+      - microservices-network
+    depends_on:
+      - auth-service
+      - history-service
+      - operations-service
+
+  auth-service:
+    build: ./auth_service
+    ports:
+      - "8001:8000"
+    networks:
+      - microservices-network
+
+  history-service:
+    build: ./history_service
+    ports:
+      - "8002:8000"
+    networks:
+      - microservices-network
+
+  operations-service:
+    build: ./operations_service
+    ports:
+      - "8003:8000"
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
